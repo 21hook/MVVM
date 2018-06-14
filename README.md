@@ -8,9 +8,9 @@ Design patterns in MVVM frameworks
 
 know the problem => analyze the states => plan the opertions => achieve the goal
 
-1. [Listener pattern](#Listener pattern)
-2. [Interpreter pattern](#Interpreter pattern)
-3. [MVVM](#MVVM) 
+1. [Listener pattern]https://github.com/21hook/MVVM#listener-pattern)
+2. [Interpreter pattern](https://github.com/21hook/MVVM#interpreter-pattern)
+3. [MVVM]https://github.com/21hook/MVVM#listener-pattern#mvvm) 
 
 ## Listener pattern
 Without listener patter, the code implementation is written directly, like this: 
@@ -174,7 +174,7 @@ var data = {name: ''}
 ```
 
 
-  
+## MVVM  
 
 
 
