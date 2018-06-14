@@ -10,7 +10,7 @@ know the problem => analyze the states => plan the opertions => achieve the goal
 
 1. [Listener pattern](https://github.com/21hook/MVVM#listener-pattern)
 2. [Interpreter pattern](https://github.com/21hook/MVVM#interpreter-pattern)
-3. [MVVM](https://github.com/21hook/MVVM#listener-pattern#mvvm) 
+3. [MVVM](https://github.com/21hook/MVVM#mvvm-1) 
 
 ## Listener pattern
 Without listener patter, the code implementation is written directly, like this: 
