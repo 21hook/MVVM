@@ -8,6 +8,7 @@ Design patterns in MVVM frameworks
 
 know the problem => analyze the states => plan the opertions => achieve the goal
 
+## Table of contents
 1. [Listener pattern](https://github.com/21hook/MVVM#listener-pattern)
 2. [Interpreter pattern](https://github.com/21hook/MVVM#interpreter-pattern)
 3. [MVVM](https://github.com/21hook/MVVM#mvvm-1) 
