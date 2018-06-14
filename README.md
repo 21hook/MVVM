@@ -8,9 +8,9 @@ Design patterns in MVVM frameworks
 
 know the problem => analyze the states => plan the opertions => achieve the goal
 
-[Listener pattern](#Listener pattern)
-[Interpreter pattern](#Interpreter pattern)
-[MVVM](#MVVM) 
+1. [Listener pattern](#Listener pattern)
+2. [Interpreter pattern](#Interpreter pattern)
+3. [MVVM](#MVVM) 
 
 ## Listener pattern
 Without listener patter, the code implementation is written directly, like this: 
