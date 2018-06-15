@@ -1,7 +1,7 @@
 # MVVM
 Design patterns in MVVM frameworks
 
-[README 中文](https://github.com/21hook/MVVM/README-zh_cn.md)
+[README 中文](https://github.com/21hook/MVVM/blob/master/README-zh_cn.md)
 
 ## Learning objectives
 - Listener/watcher/publish-subscribe pattern; observer operation; Object.defineProperty()
