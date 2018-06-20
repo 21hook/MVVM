@@ -8,10 +8,11 @@ Design patterns in MVVM frameworks
 - Interpreter pattern
 - MVVM
 
-know the problem => analyze the states => plan the opertions => achieve the goal
+know the problem => analyze the states => plan the operations => achieve the goal
 
 ## Table of contents
 1. [Listener pattern](https://github.com/21hook/MVVM#listener-pattern)
+2. [Proxy pattern] 
 2. [Interpreter pattern](https://github.com/21hook/MVVM#interpreter-pattern)
 3. [MVVM](https://github.com/21hook/MVVM#mvvm-1) 
 
@@ -42,14 +43,14 @@ login.success((data) => {
 ```
 
 The main problem of these code examples is that it isn't **modular** - it mix up the 
-**responsibilities** of functionality for button, textboox, & listbox and header, message, 
+**responsibilities** of functionality for button, text box, & list box and header, message, 
 & cart all in one module. It is not *ready for change*.
-Think about that, your resposibity is to mantain `login.js`, `header, message, cart` is 
-the resposibitities of other developers. Some day, you must add `address.refresh()` to 
+Think about that, your responsibility is to maintain `login.js`, `header, message, cart` is 
+the responsibility of other developers. Some day, you must add `address.refresh()` to 
 refresh the address component in the pages, you have to add the line of code after the 
-developer code thee `address` module done. This is just one case, if there are mutilple 
+developer code thee `address` module done. This is just one case, if there are multiple 
 modules updated, you have to update your module, again and again. All because that, you 
-mix the resposibity of some functionalities of their modules into yours.
+mix the responsibility of some functionality of their modules into yours.
 
 Let's analyze the code above:
 ```
@@ -75,10 +76,10 @@ login.success((data) => { // state transition in the object
 
 So, we can summaries some new concepts for handling the problem:
 listener pattern
-- an event source generates a list of events, which cooresponds to state 
+- an event source generates a list of events, which correspond to state 
 transitions in the object
-- one or more listeners/susbcribers register interest(subscribe) to the events, providing 
-a funciton to be called when some event occurs
+- one or more listeners/subscribers register interest(subscribe) to the events, providing 
+a function to be called when some event occurs
 
 Then, the improved code is like this
 ```
@@ -110,13 +111,13 @@ login.on('loginSuccess', (data) => {
   addrRefresh();
 })
 ```
-All you need to do is to manitain the event interfaces, other reponsibities of other modules 
-are separated from you. The porblem is handled done.
+All you need to do is to maintain the event interfaces, other responsibility of other modules 
+are separated from you. The problem is handled done.
 
 Let's put listener/watcher pattern, observer operation, & [Object.defineProperty()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) all together in Vue
 
 Ex:
-`observer` opertion
+`observer` operation
 ```
 function observe(data) {
   if (!data || type data !== 'object')  return;

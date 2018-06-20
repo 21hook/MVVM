@@ -6,13 +6,14 @@
 
 Mechanism: how it works => step by step procedures
 
-## 关键概念
+## Key concepts
 - listener/watch/publish-subscribe pattern; observer operation; object.defineProperty()
 - interpreter pattern
 - MVVM
 
 ### 目录
-1. [实现Watcher pattern, observer opertion]()
+1. [Observer operation on data]()
+2. [Dep ]
 2. [实现interpreter pattern]()
 3. [实现MVVM]()
 
@@ -25,7 +26,7 @@ Mechanism: how it works => step by step procedures
 callback
 
 
-## 实现Observer opertion
+## 实现Observer operation
 
 1. 模拟data, data observation, 绑定data的属性
 

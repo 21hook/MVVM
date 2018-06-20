@@ -1,0 +1,13 @@
+{
+  "name": "MVVM",
+  "version": "1.0.0",
+  "description": "Design patterns in MVVM frameworks",
+  "main": "index.js",
+  "repository": "github:21hook/MVVM",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["design patterns", "MVVM", "Vue"],
+  "author": "21hook <2765049749@qq.com>",
+  "license": "MIT"
+}
