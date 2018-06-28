@@ -21,12 +21,12 @@ will get notified, & it will update all subscribers of the sub-property - the wa
 
 
 ## Table of contents
-1. [Observe operation](https://github.com/21hook/MVVM#observer-operation)
-2. [Property dependencies](https://github.com/21hook/MVVM#get/property-dependencies)
-3. [Collect subscribers](https://github.com/21hook/MVVM#collect-subscribers)
-4. [Template compiler](https://github.com/21hook/MVVM#mvvm-1#template-compiler) 
-5. [View update](https://github.com/21hook/MVVM#mvvm-1#view-update)
-6. [MVVM](https://github.com/21hook/MVVM#mvvm-1#mvvm)
+1. [Observe operation](#observer-operation)
+2. [Property dependencies](#property-dependencies)
+3. [Collect subscribers](#collect-subscribers)
+4. [Template compiler](#template-compiler) 
+5. [View update](#view-update)
+6. [MVVM](#mvvm)
 
 ## Demo1: Observe operation([Source](https://github.com/21hook/MVVM/blob/master/demo1))
 Use tree recursion to traverse all sub-property nodes of the data object.
@@ -48,7 +48,7 @@ A compiler will receive a node tree(That's way <template> must have a root tag),
 The compiler analyzes each directive & interpolation, then it will create a watcher object for evaluating 
 each value of them. When a watcher object is created, it will evaluate the exp field, which stores the expressions
 of the directives or interpolations. So, all the sub-properties of the data object will be accessed. It starts to 
-collect subscribers, as shown in [Demo4](https://github.com/21hook/MVVM#collect-subscribers)
+collect subscribers, as shown in [Demo4](#collect-subscribers)
 
 ## Demo5: View update([Source](https://github.com/21hook/MVVM/blob/master/demo5))
 When create a watcher object using an expression in directives or interpolations, it also binds a update view 
@@ -58,20 +58,22 @@ view function to update the view.
 
 ## Demo6: MVVM([Source](https://github.com/21hook/MVVM/blob/master/demo6))
 The main program of a Vue instance. It need to traverse all sub-properties of a data objects, as shown in 
-[Demo1](https://github.com/21hook/MVVM#observer-operation). Then, start to compile the template to collect subscribers
-of each sub-property of the data object, as shown in [Demo4](https://github.com/21hook/MVVM#mvvm-1#template-compiler).
+[Demo1](#observer-operation). Then, start to compile the template to collect subscribers
+of each sub-property of the data object, as shown in [Demo4](#template-compiler).
 
 
 ## MVVM patterns
-
 Subscriber collections
-
+```
           init              trigger get event              add subscribers
 Template --------> Watcher  ------------------> Observe --------------------> Dep 
+```
 
 One-way data binding 
+```
  set                     notify              update           view update
 ------> Observe --------------------> Dep  ---------> Watcher -------------> View
+```
 
 ## License
 MIT
