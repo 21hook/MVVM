@@ -1,6 +1,5 @@
 # MVVM
-
-## MVVM框架中的设计模式
+Vue框架中的MVVM patterns
 
 [README English](https://github.com/21hook/MVVM/blob/master/README.md)
 

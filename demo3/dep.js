@@ -1,13 +1,21 @@
 /**
  * This class is a implementation of publisher-subscriber pattern, which is to notify watcher objects
  * set event of data object. It represents a list of dependencies for each sub-property of data object.
+ *
+ * This class define a property dependency of a data object, which store a list of watcher instances.
+ * It will get notified & update the list of watcher instances when the sub-property of the data object get
+ * mutated.
  */
 export default class Dep {
     constructor() {
+        // object private fields
         this.subs = [] // dependencies for each sub-properties of data object
+
+        // object public fields
+        Dep.target = null // current listener/subscriber
     }
     // private object methods
-    addListener(sub) { // add watcher objects as the dependencies
+    addListener(sub) { // add the watcher object as the dependencies
         this.subs.push(sub)
     }
     notify() { // notify watcher objects, when the subscribed sub-property are set/mutated

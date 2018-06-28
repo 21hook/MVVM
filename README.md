@@ -3,186 +3,78 @@ Design patterns in MVVM frameworks
 
 [README 中文](https://github.com/21hook/MVVM/blob/master/README-zh_cn.md)
 
-## Learning objectives
-- Listener/watcher/publish-subscribe pattern; observer operation; Object.defineProperty()
+## Key concepts
+- observer operation; set/get events(Object.defineProperty())
+- Listener/publish-subscribe pattern
 - Interpreter pattern
-- MVVM
+- MVVM pattern
 
-know the problem => analyze the states => plan the operations => achieve the goal
+## Mechanism
+1. Implement a data observer, which can listen get/set event on the sub-properties 
+of the data object;
+2. Implement a dependency object, which add a list of watchers for each sub-property of a data object.
+3. Implement a directive & expression compiler. It scan, analyze the directive or expression in each element node, 
+evaluate the value of the directives according to their names.
+4. Implement a watcher object, and add it into as a observer of the sub-properties of 
+the data object. When the sub-properties of the data object get mutated, the dependency object 
+will get notified, & it will update all subscribers of the sub-property - the watcher objects, automatically.
+
 
 ## Table of contents
-1. [Listener pattern](https://github.com/21hook/MVVM#listener-pattern)
-2. [Proxy pattern] 
-2. [Interpreter pattern](https://github.com/21hook/MVVM#interpreter-pattern)
-3. [MVVM](https://github.com/21hook/MVVM#mvvm-1) 
+1. [Observe operation](https://github.com/21hook/MVVM#observer-operation)
+2. [Property dependencies](https://github.com/21hook/MVVM#get/property-dependencies)
+3. [Collect subscribers](https://github.com/21hook/MVVM#collect-subscribers)
+4. [Template compiler](https://github.com/21hook/MVVM#mvvm-1#template-compiler) 
+5. [View update](https://github.com/21hook/MVVM#mvvm-1#view-update)
+6. [MVVM](https://github.com/21hook/MVVM#mvvm-1#mvvm)
 
-## Listener pattern
-Without listener patter, the code implementation is written directly, like this: 
-```
-canvas.java
+## Demo1: Observe operation([Source](https://github.com/21hook/MVVM/blob/master/demo1))
+Use tree recursion to traverse all sub-property nodes of the data object.
+For each node, bind get/set event using 
+[object.defineProperty()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)
+. 
 
-while (true) {
-  read mouse click
-  if (clicked on a trash button) doTrash();
-  else if (clicked on a textbox) doPlaceCursor();
-  else if (clicked on a name in the listbox) doSelectItem();
-  ...
-}
-```
+## Demo2: Property dependencies([Source](https://github.com/21hook/MVVM/blob/master/demo2))
+Define a Dependency class, which is a property dependency for a data object.
+Also, define a Watcher class, which is a dep listener/subscriber. This class stores a exp filed, which is an expression
+(including method calls) in directives, interpolations, computed or watcher properties of a Vue component.
 
-Or this:
-```
-login.js
+## Demo3: Collect subscribers([Source](https://github.com/21hook/MVVM/blob/master/demo3))
+When the sub-property of the data object is accessed, a dep object starts to collect subscribers/listener.
+It will add a watcher object as a subscriber of it.
 
-login.success((data) => {
-  header.setAvatar(data.avatar);
-  message.refresh();
-  cart.refresh();
-  ...
-})  
-```
+## Demo4: Template compiler([Source](https://github.com/21hook/MVVM/blob/master/demo4))
+A compiler will receive a node tree(That's way <template> must have a root tag), and return a token stream.
+The compiler analyzes each directive & interpolation, then it will create a watcher object for evaluating 
+each value of them. When a watcher object is created, it will evaluate the exp field, which stores the expressions
+of the directives or interpolations. So, all the sub-properties of the data object will be accessed. It starts to 
+collect subscribers, as shown in [Demo4](https://github.com/21hook/MVVM#collect-subscribers)
 
-The main problem of these code examples is that it isn't **modular** - it mix up the 
-**responsibilities** of functionality for button, text box, & list box and header, message, 
-& cart all in one module. It is not *ready for change*.
-Think about that, your responsibility is to maintain `login.js`, `header, message, cart` is 
-the responsibility of other developers. Some day, you must add `address.refresh()` to 
-refresh the address component in the pages, you have to add the line of code after the 
-developer code thee `address` module done. This is just one case, if there are multiple 
-modules updated, you have to update your module, again and again. All because that, you 
-mix the responsibility of some functionality of their modules into yours.
+## Demo5: View update([Source](https://github.com/21hook/MVVM/blob/master/demo5))
+When create a watcher object using an expression in directives or interpolations, it also binds a update view 
+function to update the view. If the dependent sub-property of the data object get mutated, the dep object of it will be 
+notified, and all subscribers(watchers) of the dep object will be updated. Then, each watcher will call its update 
+view function to update the view.
 
-Let's analyze the code above:
-```
-canvas.java
-
-while (true) {
-  read mouse click
-  if (clicked on a trash button) doTrash(); // state transition in the object; function to be called
-  else if (clicked on a textbox) doPlaceCursor(); // ...
-  else if (clicked on a name in the listbox) doSelectItem(); // ...
-  ...
-}
-
-login.js
-
-login.success((data) => { // state transition in the object
-  header.setAvatar(data.avatar); // funtion to be called
-  message.refresh(); // ...
-  cart.refresh(); // ...
-  ...
-})  
-```
-
-So, we can summaries some new concepts for handling the problem:
-listener pattern
-- an event source generates a list of events, which correspond to state 
-transitions in the object
-- one or more listeners/subscribers register interest(subscribe) to the events, providing 
-a function to be called when some event occurs
-
-Then, the improved code is like this
-```
-login.js
-
-ajax(url, (data) => {
-  login.emit('loginSuccess', data);
-})
-```
-
-```
-header.js
-
-const setAvatar = (avatar) => {
-  // ...
-}
-
-login.on('loginSuccess', (data) => {
-  setAvatar(data.avatar);
-})
-
-address.js
-
-const addrRefresh = () => {
-  // ...
-}
-
-login.on('loginSuccess', (data) => {
-  addrRefresh();
-})
-```
-All you need to do is to maintain the event interfaces, other responsibility of other modules 
-are separated from you. The problem is handled done.
-
-Let's put listener/watcher pattern, observer operation, & [Object.defineProperty()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) all together in Vue
-
-Ex:
-`observer` operation
-```
-function observe(data) {
-  if (!data || type data !== 'object')  return;
-  
-  Obejct.keys(data).forEach(key => defineReactive(data, key, data[key]));
-}
-
-funtion defineReactive(data, key, val) {
-  observe(val);
-  
-  Object.defineProperty(data, key, {
-    enumerable: true,
-    configurable: false,
-    get() {
-      Dep.target && dep.addDep(Dep, target);
-      return val
-    },
-    set(newVal) {
-      if (val === newVal) return;
-      
-      val = newVal;
-      dep.nofify(); // notify all the subscribers
-    }
-  })
-}
-
-class Dep {
-  constructor() {
-    this.subs = []
-  }
-  // object private methods
-  addSub(sub) {
-    this.subs.push(sub);
-  },
-  notify() {
-    this.subs.forEach(sub => sub.update());
-  },
-  removeSubs(sub) {
-    this.subs.splice(sub, 1); // remove the sub
-  }
-}
-
-function Watcher(fn){
-	this.update = function(){
-		Dep.target = this;
-		fn();
-		Dep.target = null;
-	}
-	this.update();
-}
-```
+## Demo6: MVVM([Source](https://github.com/21hook/MVVM/blob/master/demo6))
+The main program of a Vue instance. It need to traverse all sub-properties of a data objects, as shown in 
+[Demo1](https://github.com/21hook/MVVM#observer-operation). Then, start to compile the template to collect subscribers
+of each sub-property of the data object, as shown in [Demo4](https://github.com/21hook/MVVM#mvvm-1#template-compiler).
 
 
-## Interpreter pattern
+## MVVM patterns
 
-```
-var data = {name: ''}
-```
+Subscriber collections
 
+          init              trigger get event              add subscribers
+Template --------> Watcher  ------------------> Observe --------------------> Dep 
 
-## MVVM  
+One-way data binding 
+ set                     notify              update           view update
+------> Observe --------------------> Dep  ---------> Watcher -------------> View
 
-
-
-
+## License
+MIT
 
 
 

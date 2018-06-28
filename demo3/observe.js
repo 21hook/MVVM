@@ -32,9 +32,8 @@ function listenData(data, key, val) {
             return val;
         },
         set(newVal) { // when set event occurs
-            if (val === newVal) return; // still get/receive the old value if the new value is the same as before
+            if (val === newVal) return; // newVal must be different from val
             val = newVal;
-            dep.notify(); // request notify() of dep proxy
         }
     })
 }

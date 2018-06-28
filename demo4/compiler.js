@@ -1,7 +1,10 @@
 /**
- * This class implements the interpreter pattern, which translate the template
- * directives into a abstract syntax tree. Each node of the AST is added a listener
+ * This class implements the interpreter pattern, which translate the template directives
+ * or interpolations into a abstract syntax tree. Each node of the AST is added a listener
  * & trigger notify method when it is accessed/mutated.
+ *
+ * This class defines a compiler, which scans the node tree as a token stream, analyze directives &
+ * interpolations, and evaluate their value, respectively.
  */
 class Compiler {
     /*
@@ -87,12 +90,20 @@ class Compiler {
 
     /**
      * Evaluate the directive nodes.
+     * Ex: Some directive names
+     *  V-bind:directive
+     *  v-if
+     *  v-show
+     *  v-text
+     *  v-html
+     *  v-on:event
      *
      * @param elt an element node
      */
     evaluateDirective(elt) {
         let self = this;
 
+        /* v-bind:directive = '' ; v-on:event = ''*/
         [].slice.call(elt.attributes).forEach(attr => {
             let name = attr.name;
 

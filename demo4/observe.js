@@ -1,4 +1,4 @@
-import Dep from './Dep'
+import Dep from './dep'
 /**
  * Traverse/walk through all nodes in data object.
  *
@@ -41,13 +41,15 @@ function listenData(data, key, val) {
         enumerable: true,
         configurable: false,
         get() {
-            dep.addListener(this); // add the subscriber/listener
+            if (Dep.target) { // add the subscriber/listener for collect subscribers(watcher instances)
+                dep.depend();
+            }
             return val;
         },
         set(newVal) { // when set event occurs
-            if (val === newVal) return; // the request data stored in val(cache hit)
+            if (val === newVal) return; // still receive the old value if the new value is the same as before
             val = newVal;
-            dep.depend();
+            dep.notify(); // request notify method of the dep object
         }
     })
 }

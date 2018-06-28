@@ -2,7 +2,7 @@ import observe from './observe'
 import Compiler from './compiler'
 
 /**
- * Create a
+ * Create a MVVM instance.
  *
  * @param options
  * @constructor
@@ -20,10 +20,9 @@ class MVVM {
         this.options = options;
         this._data = this.options.data;
 
-        Object.keys(this._data).forEach(key => self._proxy(key)); // add proxy methods to access the sub-properties
-        // of data object
+        Object.keys(this._data).forEach(key => self._proxy(key));
         observe(this._data, this);
-        this.compile = new Compiler(options.el || document.body, this);
+        this.compiler = new Compiler(options.el || document.body, this);
     }
     /* object private methods */
 

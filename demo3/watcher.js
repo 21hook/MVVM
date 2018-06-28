@@ -5,9 +5,10 @@ import Dep from './dep'
  */
 class Watcher {
     /**
+     * Create a Watcher instance.
      *
-     * @param vm Vue instance
-     * @param exp exp interpolation in directive or text nodes
+     * @param vm a Vue instance
+     * @param exp an expression(including method calls) in directives, interpolations, computed or watch properties
      */
     constructor(vm, exp) {
         // object private data
@@ -29,7 +30,7 @@ class Watcher {
     get() {
         Dep.target = this; // point current subscriber - watcher object
 
-        let val = this.vm[exp]; // add watcher object as subscribers to observer objects
+        let val = this.vm[this.exp]; // add watcher object as subscribers to observer objects
         Dep.target = null;
         return val; // return the old val of observer object
     }

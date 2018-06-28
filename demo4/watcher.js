@@ -8,8 +8,8 @@ import Dep from './dep'
  *      ▆ <----------------------------- ▆ <-------------------------------- ▆
  * Watcher ins                          Dep ins                        observe: getter/setter
  *
- * This class represents a list of listeners, and get notified when the corresponding
- * sub-property of data object is changed.
+ * This class represents a dep listener/watcher for a dep object, which will be get notified when the corresponding
+ * sub-property value of the data object is changed.
  */
 class Watcher {
     /*
@@ -18,18 +18,18 @@ class Watcher {
 
      */
     /**
-     * Create a watcher instance to listen get/set events on the sub-properties
-     * of data object. A watcher parse an expression or function, collect dependencies,
+     * Create a watcher instance to listen the set event on the sub-properties
+     * of data object. A watcher parse an expression(including method calls), collect dependencies,
      * and trigger callback when the expression value changes.
      *
      * @param vm the Vue instance
-     * @param expOrFn an expression or method in directive, template, computed or watch properties
-     * @param cb a callback function to update the view
+     * @param expOrFn an expression or method in directive, interpolation, computed or watch properties
+     * @param cb a update view callback
      */
     constructor(vm, expOrFn, cb) {
         // object private data
         this.vm = vm;
-        this.getter= expOrFn;
+        this.getter= expOrFn; // !! expression(combinations of constants, variables, methods, or subexpression)
         this.cb = cb;
         this.depIds = {}; // sub-properties of data object
         this.value = this.get(); // old value of sub-property objects
