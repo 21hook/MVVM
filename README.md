@@ -48,7 +48,7 @@ A compiler will receive a node tree(That's way <template> must have a root tag),
 The compiler analyzes each directive & interpolation, then it will create a watcher object for evaluating 
 each value of them. When a watcher object is created, it will evaluate the exp field, which stores the expressions
 of the directives or interpolations. So, all the sub-properties of the data object will be accessed. It starts to 
-collect subscribers, as shown in [Demo4](#demo4-template-compilersource)
+collect subscribers, as shown in [Demo4](#demo4-template-compilersource).
 
 ## Demo5: View update([Source](https://github.com/21hook/MVVM/blob/master/demo5))
 When create a watcher object using an expression in directives or interpolations, it also binds a update view 
@@ -63,26 +63,22 @@ of each sub-property of the data object, as shown in [Demo4](#demo4-template-com
 
 
 ## MVVM patterns
-Subscriber collections
+- Subscriber collections
 ```
           init              trigger get event              add subscribers
 Template --------> Watcher  ------------------> Observe --------------------> Dep 
 ```
 
-One-way data binding 
+- One-way data binding 
 ```
- set                     notify              update           view update
-------> Observe --------------------> Dep  ---------> Watcher -------------> View
+       set                     notify              update           view update
+Data -------> Observe --------------------> Dep  ---------> Watcher -------------> View
 ```
+
+The overall patterns of MVVM is like this ![MVVM patterns](http://zhouweicsu.github.io/blog/2017/03/07/vue-2-0-reactivity/Vue%20Reactivity.svg)
 
 ## License
 MIT
-
-
-
-
-
-
 
 ## Reference 
 [1] *Design patterns: elements of reusable object-oriented software* <br>
