@@ -21,12 +21,12 @@ will get notified, & it will update all subscribers of the sub-property - the wa
 
 
 ## Table of contents
-1. [Observe operation](#observer-operation)
-2. [Property dependencies](#property-dependencies)
-3. [Collect subscribers](#collect-subscribers)
-4. [Template compiler](#template-compiler) 
-5. [View update](#view-update)
-6. [MVVM](#mvvm)
+1. [Observe operation](#demo1-observe-operationsource)
+2. [Property dependencies](#demo2-property-dependenciessource)
+3. [Collect subscribers](#demo3-collect-subscriberssource)
+4. [Template compiler](#demo4-template-compilersource) 
+5. [View update](#demo5-view-updatesource)
+6. [MVVM](##demo6-mvvmsource)
 
 ## Demo1: Observe operation([Source](https://github.com/21hook/MVVM/blob/master/demo1))
 Use tree recursion to traverse all sub-property nodes of the data object.
@@ -48,7 +48,7 @@ A compiler will receive a node tree(That's way <template> must have a root tag),
 The compiler analyzes each directive & interpolation, then it will create a watcher object for evaluating 
 each value of them. When a watcher object is created, it will evaluate the exp field, which stores the expressions
 of the directives or interpolations. So, all the sub-properties of the data object will be accessed. It starts to 
-collect subscribers, as shown in [Demo4](#collect-subscribers)
+collect subscribers, as shown in [Demo4](#demo4-template-compilersource)
 
 ## Demo5: View update([Source](https://github.com/21hook/MVVM/blob/master/demo5))
 When create a watcher object using an expression in directives or interpolations, it also binds a update view 
@@ -58,8 +58,8 @@ view function to update the view.
 
 ## Demo6: MVVM([Source](https://github.com/21hook/MVVM/blob/master/demo6))
 The main program of a Vue instance. It need to traverse all sub-properties of a data objects, as shown in 
-[Demo1](#observer-operation). Then, start to compile the template to collect subscribers
-of each sub-property of the data object, as shown in [Demo4](#template-compiler).
+[Demo1](#demo1-observe-operationsource). Then, start to compile the template to collect subscribers
+of each sub-property of the data object, as shown in [Demo4](#demo4-template-compilersource).
 
 
 ## MVVM patterns
