@@ -4,7 +4,7 @@ Design patterns in MVVM frameworks
 [README 中文](https://github.com/21hook/MVVM/blob/master/README-zh_cn.md)
 
 ## Key concepts
-- observer operation; set/get events(Object.defineProperty())
+- Observe operation; set/get events(Object.defineProperty())
 - Listener/publish-subscribe pattern
 - Interpreter pattern
 - MVVM pattern
