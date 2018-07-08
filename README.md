@@ -62,7 +62,7 @@ The main program of a Vue instance. It need to traverse all sub-properties of a 
 of each sub-property of the data object, as shown in [Demo4](#demo4-template-compilersource).
 
 
-## MVVM patterns
+## MVVM architecture
 - Subscriber collections
 ```
           init              trigger get event              add subscribers
@@ -83,4 +83,4 @@ MIT
 ## Reference 
 [1] *Design patterns: elements of reusable object-oriented software* <br>
 [2] <<JavaScript设计模式与开发实践>> <br>
-[3] wiki [observer pattern](https://en.wikipedia.org/wiki/Observer_pattern)
+[3] Wikipedia [observer pattern](https://en.wikipedia.org/wiki/Observer_pattern)
