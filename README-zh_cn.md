@@ -45,8 +45,8 @@ MVVM框架中的设计模式
 
 ## Demo6: MVVM([Source](https://github.com/21hook/MVVM/blob/master/demo6))
 Vue实例的主程序。它需要遍历数据对象的所有子属性，如图所示
-(Demo1)(# demo1-observe-operationsource)。然后，开始编译模板以收集
-数据对象的每个子属性的订阅者，如[Demo4](# Demo4 -template-compile ersource)所示。
+(Demo1)(#demo1-observe-operationsource)。然后，开始编译模板以收集
+数据对象的每个子属性的订阅者，如[Demo4](#Demo4 -template-compile ersource)所示。
 
 ## MVVM architecture
 - watcher订阅者收集
