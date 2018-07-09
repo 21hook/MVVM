@@ -29,8 +29,7 @@ For each node, bind get/set event using
 
 ## Demo2: Property dependencies([Source](https://github.com/21hook/MVVM/blob/master/demo2))
 Define a Dependency class, which is a property dependency for a data object.
-Also, define a Watcher class, which is a dep listener/subscriber. This class stores a exp filed, which is an expression
-(including method calls) in directives, interpolations, computed or watcher properties of a Vue component.
+Also, define a Watcher class, which is a dep listener/subscriber. This class stores a exp field, which is an [expression](https://en.wikipedia.org/wiki/Expression_(computer_science)) in directives and interpolations of a Vue component.
 
 ## Demo3: Collect subscribers([Source](https://github.com/21hook/MVVM/blob/master/demo3))
 When the sub-property of the data object is accessed, a dep object starts to collect subscribers/listener.
