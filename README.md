@@ -4,21 +4,14 @@ Design patterns in MVVM frameworks
 [README 中文](https://github.com/21hook/MVVM/blob/master/README-zh_cn.md)
 
 ## Key concepts
-- Observe operation; set/get events(Object.defineProperty())
-- Listener/publish-subscribe pattern
-- Interpreter pattern
-- MVVM pattern
+tree traverse, get/set event, listener/publish-subscribe pattern, interpreter pattern, single-way data-binding
 
 ## Mechanism
-1. Implement a data observer, which can listen get/set event on the sub-properties 
-of the data object;
-2. Implement a dependency object, which add a list of watchers for each sub-property of a data object.
-3. Implement a directive & expression compiler. It scan, analyze the directive or expression in each element node, 
-evaluate the value of the directives according to their names.
-4. Implement a watcher object, and add it into as a observer of the sub-properties of 
-the data object. When the sub-properties of the data object get mutated, the dependency object 
+Implement a data observer, which can listen get/set event on the sub-properties 
+of the data object. Implement a dependency object, which add a list of watchers for each sub-property of a data object.
+Implement a directive & expression compiler. It scan, analyze the directive or expression in each element node, 
+evaluate the value of the directives according to their names. Implement a watcher object, and add it into as a observer of the sub-properties of the data object. When the sub-properties of the data object get mutated, the dependency object 
 will get notified, & it will update all subscribers of the sub-property - the watcher objects, automatically.
-
 
 ## Table of contents
 1. [Observe operation](#demo1-observe-operationsource)
@@ -83,4 +76,4 @@ MIT
 ## Reference 
 [1] *Design patterns: elements of reusable object-oriented software* <br>
 [2] <<JavaScript设计模式与开发实践>> <br>
-[3] Wikipedia [observer pattern](https://en.wikipedia.org/wiki/Observer_pattern)
+[3] Wikipedia [Observer pattern](https://en.wikipedia.org/wiki/Observer_pattern)
