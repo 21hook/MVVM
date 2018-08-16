@@ -1,5 +1,5 @@
 # MVVM
-Design patterns in MVVM frameworks
+Mechanism of MVVM frameworks
 
 [README 中文](https://github.com/21hook/MVVM/blob/master/README-zh_cn.md)
 
