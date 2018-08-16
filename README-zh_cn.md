@@ -1,5 +1,5 @@
 # MVVM
-MVVM框架中的设计模式
+MVVM实现原理
 
 [README English](https://github.com/21hook/MVVM/blob/master/README.md)
 
